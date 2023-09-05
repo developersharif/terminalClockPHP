@@ -10,7 +10,7 @@ function get_terminal_width() {
         if (preg_match('/Columns:\s+(\d+)/', $output, $matches)) {
             return (int)$matches[1];
         }
-    }elseif(strtoupper(substr(PHP_OS, 0, 3)) === "LINUX"){
+    }elseif(strtoupper(substr(PHP_OS, 0, 3)) === "LIN"){
         return exec('tput cols');
     }
 }
@@ -33,7 +33,7 @@ echo $color.$formattedText.$bg."\n";
     echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
     },"WIN");
     os_platform(function() use ($text,$color,$bg,$fontSize) {
-
+        
             // Linux or other Unix-like system
     $fontSizeCode = "\e[{$fontSize}m";
 
@@ -46,7 +46,10 @@ $padding = str_repeat(' ', floor(($terminalWidth - strlen($text)) / 2));
 $formattedText = "\e[1m" . $fontSizeCode . $padding . $text . $padding . "\e[0m";
 
 echo $color.$formattedText.$bg."\n";
-    },"LINUX");
+sleep(1);
+system("clear");
+
+    },"LIN");
 
 }
 
